@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      nodeName: k8s-worker-5
+      containers:
+      - image: localhost/exam-platform-main:latest
+        name: exam-platform-main
+        resources: {}
+status: {}
