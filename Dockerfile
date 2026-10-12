@@ -1,16 +1,7 @@
-FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:24.16.0-trixie-slim AS base
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates openssl \
-    && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
 
 FROM base AS build
 
-RUN npm install -g pnpm@12.8.1 --registry=https://registry.npmmirror.com \
-    && pnpm config set registry https://registry.npmmirror.com \
-    && pnpm config get registry
+RUN corepack enable && corepack prepare pnpm@12.8.1 --activate
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY prisma ./prisma
