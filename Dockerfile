@@ -8,7 +8,7 @@ WORKDIR /app
 
 FROM base AS build
 
-RUN corepack enable && corepack prepare pnpm@12.8.1 --activate
+RUN npm install -g pnpm@12.8.1 --registry=https://registry.npmmirror.com
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY prisma ./prisma
