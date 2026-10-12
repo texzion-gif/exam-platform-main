@@ -8,7 +8,11 @@ WORKDIR /app
 
 FROM base AS build
 
-RUN corepack enable && corepack prepare pnpm@12.8.1 --activate
+ENV COREPACK_NPM_REGISTRY=https://registry.npmmirror.com
+
+RUN corepack enable \
+    && corepack prepare pnpm@12.8.1 --activate \
+    && pnpm config set registry https://registry.npmmirror.com
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY prisma ./prisma
