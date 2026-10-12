@@ -8,7 +8,9 @@ WORKDIR /app
 
 FROM base AS build
 
-RUN npm install -g pnpm@12.8.1 --registry=https://registry.npmmirror.com
+RUN npm install -g pnpm@12.8.1 --registry=https://registry.npmmirror.com \
+    && pnpm config set registry https://registry.npmmirror.com \
+    && pnpm config get registry
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY prisma ./prisma
