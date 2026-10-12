@@ -1,3 +1,10 @@
+FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/node:24.16.0-trixie-slim AS base
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates openssl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 
 FROM base AS build
 
